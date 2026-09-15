@@ -20,7 +20,7 @@ PLAYER_VEL = 5
 window = pygame.display.set_mode((WIDTH,HEIGHT))
 
 from playerLogic import Player
-from GameObject import Block, Fire
+from gameObject import Block, Fire
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -65,9 +65,9 @@ def main(window):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and player.jump_count < 2:
                     player.jump()
-        player.handle_move(objects)
         player.loop(FPS)
         fire.loop()
+        player.handle_move(objects)
         draw(window, background,bg_img,player, objects, offset_x)
 
 

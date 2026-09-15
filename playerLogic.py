@@ -20,7 +20,13 @@ class Player(pygame.sprite.Sprite):
         self.direction =  "left"
         self.fall_count = 0
         self.jump_count = 0
+        self.hit = False
+        self.hit_count = 0
         self.update_sprite()
+
+    def make_hit(self):
+        self.hit = True
+        self.hit_count = 0
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -43,7 +49,10 @@ class Player(pygame.sprite.Sprite):
         self.move(self.x_vel, self.y_vel)
 
         self.fall_count += 1
-
+        if self.hit:
+            self.hit_count += 1
+        if self.hit_count > fps * 1:
+            self.hit = False
         self.update_sprite()
 
     def draw(self, window, offset_x):
@@ -64,11 +73,19 @@ class Player(pygame.sprite.Sprite):
             self.move_right(self.PLAYER_VEL)
 
     
-        self.handle_vertical_collision(objects, self.y_vel)
-        
+        vertical_collide = self.handle_vertical_collision(objects, self.y_vel)
+        to_check = [collide_left, collide_right, *vertical_collide]
+        for obj in to_check:
+            if obj and obj.name == "fire":
+                self.make_hit()
+        '''
+        - refractor collide to return all collided objects
+        '''
 
     def update_sprite(self):
         sprite_sheet = "idle"
+        if self.hit:
+            sprite_sheet = "hit"
         if self.y_vel < 0:
             if self.jump_count == 1:
                 sprite_sheet = "jump"
@@ -110,7 +127,7 @@ class Player(pygame.sprite.Sprite):
                 elif dy < 0:
                     self.rect.top = obj.rect.bottom
                     self.hit_head()
-            collied_objects.append(obj)
+                collied_objects.append(obj)
         return collied_objects
 
     def jump(self):

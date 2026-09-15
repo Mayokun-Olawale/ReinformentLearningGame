@@ -38,7 +38,7 @@ class Fire(Object):
     def loop(self):
         sprites = self.fire[self.animation_name]
         sprite_idx = (self.animation_count // self.ANIMATION_DELAY) % len(sprites)
-        self.sprite = sprites[sprite_idx]
+        self.image = sprites[sprite_idx]
         self.animation_count += 1
 
         self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
