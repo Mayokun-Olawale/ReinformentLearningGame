@@ -21,7 +21,7 @@ PLAYER_VEL = 5
 window = pygame.display.set_mode((WIDTH,HEIGHT))
 
 from playerLogic import Player
-from gameObject import Block, Fire, StartFlag
+from gameObject import Block, Enemy, StartFlag
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background", name))
@@ -64,16 +64,31 @@ def main(window):
         for i in box_positions
     ]
     player = Player(block_size*2, HEIGHT - block_size - 64, 50, 50)
-    # fire = Fire(100, HEIGHT - block_size - 64, 16, 32)
     startFlag = StartFlag(0, HEIGHT - block_size - 130, 70, 90)
 
     floor_left = startFlag.rect.left
     floor_right = floor[-1].rect.right
     for i in range(5):
-        idx = random.randint(0,len(floor) - 1)
+        idx = random.randint(5,len(floor) - 1)
         floor.pop(idx)
-    # fire.on()
-    objects = [*floor, *floating_box, startFlag]
+
+    floor_by_x = {block.rect.x: block for block in floor}
+    valid_enemy_starts = [
+        block.rect.x
+        for block in sorted(floor, key=lambda block: block.rect.x)
+        if block.rect.x >= block_size * 4
+        and block.rect.x <= floor_right - block_size * 4
+        and all(block.rect.x + offset * block_size in floor_by_x for offset in range(3))
+    ]
+    enemy_starts = [
+        valid_enemy_starts[index * (len(valid_enemy_starts) - 1) // 3]
+        for index in range(4)
+    ]
+    enemies = [
+        Enemy(x, HEIGHT - block_size - 64, 32, 32)
+        for x in enemy_starts
+    ]
+    objects = [*floor, *floating_box, *enemies, startFlag]
 
     run = True
     offset_x = 0
@@ -97,8 +112,9 @@ def main(window):
         elif player.rect.right > floor_right:
             player.rect.right = floor_right
             player.x_vel = 0
-        # fire.loop()
         startFlag.loop()
+        for enemy in enemies:
+            enemy.loop()
         draw(window, background,bg_img,player, objects, offset_x)
 
 
@@ -106,7 +122,6 @@ def main(window):
             offset_x += player.x_vel
 
         offset_x = max(floor_left, min(offset_x, floor_right - WIDTH))
-    
 
     
     pygame.quit()
