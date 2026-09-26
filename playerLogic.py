@@ -23,10 +23,26 @@ class Player(pygame.sprite.Sprite):
         self.hit = False
         self.hit_count = 0
         self.update_sprite()
+        self.life_count = 3
+        self.fruit_count = 0
+        self.finished = False
+        self.end_reason = None
 
     def make_hit(self):
+        if self.hit:
+            return
         self.hit = True
         self.hit_count = 0
+        self.life_count = max(0, self.life_count - 1)
+        if self.life_count == 0:
+            self.finished = True
+            self.end_reason = "defeated"
+
+    def collect_fruit(self, fruit):
+        if fruit.collected:
+            return
+        fruit.collect()
+        self.fruit_count += 1
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -76,11 +92,14 @@ class Player(pygame.sprite.Sprite):
         vertical_collide = self.handle_vertical_collision(objects, self.y_vel)
         to_check = [collide_left, collide_right, *vertical_collide]
         for obj in to_check:
-            if obj and obj.name == "fire":
+            if obj and obj.name == "endTrophy":
+                self.finished = True
+                self.end_reason = "completed"
+            elif obj and obj.name == "enemy" and not self.hit:
                 self.make_hit()
-        '''
-        - refractor collide to return all collided objects
-        '''
+            elif obj and obj.name == "fruit":
+                self.collect_fruit(obj)
+        
 
     def update_sprite(self):
         sprite_sheet = "idle"
@@ -134,7 +153,7 @@ class Player(pygame.sprite.Sprite):
         if self.jump_count >= 2:
             return
 
-        self.y_vel = -self.GRAVITY * 9
+        self.y_vel = -self.GRAVITY * 9.5
         self.animation_count = 0
         self.jump_count +=1 
         if self.jump_count == 1:

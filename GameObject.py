@@ -52,11 +52,17 @@ class Block(Object):
         self.mask = pygame.mask.from_surface(self.image)
 
 class StartFlag(Object):
-    ANIMATION_DELAY = 6
+    ANIMATION_DELAY = 3
 
     def __init__(self, x, y, width, height):
         super().__init__(x, y, width, height, "startFlag")
-        self.startFlag = load_sprite_sheets("Items/Checkpoints", "Start", width, height)
+        source_start_flag = load_sprite_sheets("Items/Checkpoints", "Start", 64, 64)
+        self.startFlag = {
+            "moving": [
+                pygame.transform.scale(sprite, (width, height))
+                for sprite in source_start_flag["moving"]
+            ]
+        }
         self.image = self.startFlag["moving"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
@@ -64,10 +70,40 @@ class StartFlag(Object):
     def loop(self):
         sprites = self.startFlag["moving"]
         sprite_idx = (self.animation_count // self.ANIMATION_DELAY) % len(sprites)
+        flag_anchor = self.rect.midbottom
         self.image = sprites[sprite_idx]
         self.animation_count += 1
         
-        self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
+        self.rect = self.image.get_rect(midbottom=flag_anchor)
+        self.mask = pygame.mask.from_surface(self.image)
+        
+        if self.animation_count // self.ANIMATION_DELAY > len(sprites):
+            self.animation_count = 0
+
+class EndTrophy(Object):
+    ANIMATION_DELAY = 9
+
+    def __init__(self, x, y, width, height):
+        super().__init__(x, y, width, height, "endTrophy")
+        source_end_trophy = load_sprite_sheets("Items/Checkpoints", "End", 64, 64)
+        self.endTrophy = {
+            "moving": [
+                pygame.transform.scale(sprite, (width, height))
+                for sprite in source_end_trophy["moving"]
+            ]
+        }
+        self.image = self.endTrophy["moving"][0]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.animation_count = 0
+
+    def loop(self):
+        sprites = self.endTrophy["moving"]
+        sprite_idx = (self.animation_count // self.ANIMATION_DELAY) % len(sprites)
+        trophy_anchor = self.rect.midbottom
+        self.image = sprites[sprite_idx]
+        self.animation_count += 1
+        
+        self.rect = self.image.get_rect(midbottom=trophy_anchor)
         self.mask = pygame.mask.from_surface(self.image)
         
         if self.animation_count // self.ANIMATION_DELAY > len(sprites):
@@ -77,20 +113,43 @@ class Fruit(Object):
     ANIMATION_DELAY = 6
     
     def __init__(self, x, y, width, height):
-        super().__init__(x, y, width, height, "startFlag")
-        self.startFlag = load_sprite_sheets("Items/Checkpoints", "Start", width, height)
-        self.image = self.startFlag["moving"][0]
+        super().__init__(x, y, width, height, "fruit")
+        source_fruit = load_sprite_sheets("Items", "Fruits", 32, 32)
+        self.fruit = {
+            "Strawberry": [
+                pygame.transform.scale(sprite, (width, height))
+                for sprite in source_fruit["Strawberry"]
+            ]
+        }
+        self.collected_sprites = [
+            pygame.transform.scale(sprite, (width, height))
+            for sprite in source_fruit["Collected"]
+        ]
+        self.image = self.fruit["Strawberry"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
-    
+        self.collected = False
+        self.remove = False
+
+    def collect(self):
+        if self.collected:
+            return
+        self.collected = True
+        self.animation_count = 0
+        self.mask = pygame.Mask(self.image.get_size())
+
     def loop(self):
-        sprites = self.startFlag["moving"]
+        sprites = self.collected_sprites if self.collected else self.fruit["Strawberry"]
         sprite_idx = (self.animation_count // self.ANIMATION_DELAY) % len(sprites)
+        fruit_anchor = self.rect.midbottom
         self.image = sprites[sprite_idx]
         self.animation_count += 1
             
-        self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
-        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect(midbottom=fruit_anchor)
+        if not self.collected:
+            self.mask = pygame.mask.from_surface(self.image)
             
-        if self.animation_count // self.ANIMATION_DELAY > len(sprites):
+        if self.collected and self.animation_count >= self.ANIMATION_DELAY * len(sprites):
+            self.remove = True
+        elif self.animation_count // self.ANIMATION_DELAY > len(sprites):
             self.animation_count = 0
