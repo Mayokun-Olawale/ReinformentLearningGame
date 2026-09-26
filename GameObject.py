@@ -20,7 +20,7 @@ class Block(Object):
         self.mask = pygame.mask.from_surface(self.image)
 
 class Fire(Object):
-    ANIMATION_DELAY = 3
+    ANIMATION_DELAY = 8
     def __init__(self, x, y, width, height):
         super().__init__(x, y, width, height, "fire")
         self.fire = load_sprite_sheets("Traps", "Fire", width, height)
@@ -46,4 +46,47 @@ class Fire(Object):
 
         if self.animation_count // self.ANIMATION_DELAY > len(sprites):
             self.animation_count = 0
+
+class StartFlag(Object):
+    ANIMATION_DELAY = 6
+
+    def __init__(self, x, y, width, height):
+        super().__init__(x, y, width, height, "startFlag")
+        self.startFlag = load_sprite_sheets("Items/Checkpoints", "Start", width, height)
+        self.image = self.startFlag["moving"][0]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.animation_count = 0
+
+    def loop(self):
+        sprites = self.startFlag["moving"]
+        sprite_idx = (self.animation_count // self.ANIMATION_DELAY) % len(sprites)
+        self.image = sprites[sprite_idx]
+        self.animation_count += 1
         
+        self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
+        self.mask = pygame.mask.from_surface(self.image)
+        
+        if self.animation_count // self.ANIMATION_DELAY > len(sprites):
+            self.animation_count = 0
+
+class Fruit(Object):
+    ANIMATION_DELAY = 6
+    
+    def __init__(self, x, y, width, height):
+        super().__init__(x, y, width, height, "startFlag")
+        self.startFlag = load_sprite_sheets("Items/Checkpoints", "Start", width, height)
+        self.image = self.startFlag["moving"][0]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.animation_count = 0
+    
+    def loop(self):
+        sprites = self.startFlag["moving"]
+        sprite_idx = (self.animation_count // self.ANIMATION_DELAY) % len(sprites)
+        self.image = sprites[sprite_idx]
+        self.animation_count += 1
+            
+        self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
+        self.mask = pygame.mask.from_surface(self.image)
+            
+        if self.animation_count // self.ANIMATION_DELAY > len(sprites):
+            self.animation_count = 0

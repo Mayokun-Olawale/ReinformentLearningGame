@@ -9,6 +9,7 @@ def flip(sprites):
 
 def load_sprite_sheets(dir1, dir2, width, height, direction=False):
     path = join("assets", dir1, dir2)
+    # print(path)
     images = [f for f in listdir(path) if isfile(join(path, f))]
     all_sprites = {}
 

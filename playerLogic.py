@@ -134,7 +134,7 @@ class Player(pygame.sprite.Sprite):
         if self.jump_count >= 2:
             return
 
-        self.y_vel = -self.GRAVITY * 8
+        self.y_vel = -self.GRAVITY * 9
         self.animation_count = 0
         self.jump_count +=1 
         if self.jump_count == 1:
