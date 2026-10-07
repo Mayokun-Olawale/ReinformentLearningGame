@@ -57,3 +57,48 @@ Call `reset()` before stepping and after each episode ends.
 
 To verify the environment, install pytest and run
 `SDL_VIDEODRIVER=dummy python -m pytest -q`.
+
+Training tools are in `agents/Deep_Q-Network/`. Training and playback default to
+randomized courses; each training episode receives a different seeded layout.
+Install training dependencies and start a new run:
+
+```bash
+python -m pip install -r agents/Deep_Q-Network/requirements-training.txt
+python agents/Deep_Q-Network/train_dqn.py --timesteps 500000
+```
+
+The pipeline uses the original course generator, varying gaps, floating platforms,
+fruit and guard placement. It does not randomize gravity or change game physics.
+Training uses course seeds 0–99,999. Every 25,000 decisions it validates on five
+held-out seeds 100,000–100,004. The best validation checkpoint and final model are
+saved in `saved_models/`, with configuration and validation metrics; no fixed-course
+or demonstration models are retained. Training logs remain in `tensorboard_logs/`.
+
+Training uses four-tick actions and rewards +0.01 per pixel of new forward progress,
+-0.01 per tick, +2 fruit, -2 damage, +100 trophy, and -10 fall/defeat/timeout.
+Exploration decays over 80% of training to 0.1. The final chart is `training_results.png`.
+
+Evaluate on twenty fresh course seeds, independent of training and validation:
+
+```bash
+python agents/Deep_Q-Network/evaluate_dqn.py --episodes 20
+```
+
+The default seeds start at 200,000. `evaluation_results.json` includes completion,
+fruit, damage, falls and progress. Reported success rates describe that test set,
+not a guarantee of success on every generated course. Playback uses the
+validation-selected best checkpoint.
+
+Watch the best randomized-course policy as VirtualGuy:
+
+```bash
+python agents/Deep_Q-Network/watch_dqn.py --episodes 3
+```
+
+Each episode uses a different layout. Escape closes playback; N skips an episode.
+Use `--fixed-course` only for a diagnostic fixed-layout run. Playback automatically
+loads the saved action cadence from `saved_models/config.json`.
+
+`record_walkthrough.py` can save a randomized-course GIF and full trajectory.
+`plot_training.py` can regenerate the chart from the episode log. The reusable
+helpers are `training_env.py`, `training_paths.py`, and `model_profile.py`.

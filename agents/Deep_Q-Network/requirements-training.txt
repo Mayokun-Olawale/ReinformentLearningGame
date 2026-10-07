@@ -1,0 +1,4 @@
+-r ../../requirements.txt
+stable-baselines3>=2.4,<3
+matplotlib>=3.9,<4
+pillow>=9
