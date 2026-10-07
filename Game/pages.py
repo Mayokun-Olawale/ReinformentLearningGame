@@ -2,7 +2,7 @@ import pygame
 
 
 def start():
-    import game
+    from . import game
 
     background, background_image = game.get_background("Pink.png")
     title_font = pygame.font.Font(None, 96)
@@ -11,7 +11,7 @@ def start():
     button_rect = pygame.Rect(390, 520, 270, 80)
     clock = pygame.time.Clock()
 
-    description = "Explore the course, avoid enemies, collect fruit, and reach the trophy."
+    description = "Avoid hazards, collect fruit, and reach the trophy."
     running = True
     while running:
         clock.tick(game.FPS)
@@ -49,7 +49,7 @@ def start():
 
 
 def end(player):
-    import game
+    from . import game
 
     background, background_image = game.get_background("Pink.png")
     title_font = pygame.font.Font(None, 82)
@@ -76,6 +76,7 @@ def end(player):
             "completed": "Course Complete",
             "defeated": "Defeated",
             "fell": "You Fell",
+            "time_expired": "Time Expired",
         }.get(player.end_reason, "Game Over")
         title = title_font.render(title_text, True, (255, 255, 255))
         title_rect = title.get_rect(center=(game.WIDTH // 2, 180))
@@ -90,6 +91,7 @@ def end(player):
         button_text = button_font.render("Close", True, (255, 255, 255))
         game.window.blit(button_text, button_text.get_rect(center=button_rect.center))
         pygame.display.update()
+
 
 
 if __name__ == "__main__":

@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+saved_models/
+tensorboard_logs/
+training_results.png
+saved_models_8_observations/
+tensorboard_logs_8_observations/
+evaluation_results.json
+saved_models_51_baseline/
+tensorboard_logs_51_baseline/
+attempts/
+
+# Local instructions and reference specifications
+AI/
+agents/Deep_Q-Network/spec.md
+agents/Deep_Q-Network/refractoring.md
+
+# Generated playback recordings
+agents/Deep_Q-Network/walkthrough/

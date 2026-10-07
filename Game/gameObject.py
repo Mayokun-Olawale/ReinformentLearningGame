@@ -1,5 +1,5 @@
 import pygame
-from sprite_utils import get_block,load_sprite_sheets
+from .sprite_utils import get_block,load_sprite_sheets,sprite_mask
 class Object(pygame.sprite.Sprite):
     def __init__(self,x,y,width,height,name=None):
         super().__init__()
@@ -24,7 +24,7 @@ class Enemy(Object):
         self.animation_count = 0
         self.direction = "right"
         self.image = self.SPRITES["run_right"][0]
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = sprite_mask(self.image)
 
     def loop(self):
         self.x_vel = self.PATROL_SPEED if self.direction == "right" else -self.PATROL_SPEED
@@ -42,14 +42,14 @@ class Enemy(Object):
         self.image = sprites[sprite_idx]
         self.animation_count += 1
         self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = sprite_mask(self.image)
 
 class Block(Object):
     def __init__(self,x,y,size):
         super().__init__(x,y,size,size)
         block = get_block(size)
         self.image.blit(block, (0,0))
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = sprite_mask(self.image)
 
 class StartFlag(Object):
     ANIMATION_DELAY = 3
@@ -64,7 +64,7 @@ class StartFlag(Object):
             ]
         }
         self.image = self.startFlag["moving"][0]
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = sprite_mask(self.image)
         self.animation_count = 0
 
     def loop(self):
@@ -75,7 +75,7 @@ class StartFlag(Object):
         self.animation_count += 1
         
         self.rect = self.image.get_rect(midbottom=flag_anchor)
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = sprite_mask(self.image)
         
         if self.animation_count // self.ANIMATION_DELAY > len(sprites):
             self.animation_count = 0
@@ -93,7 +93,7 @@ class EndTrophy(Object):
             ]
         }
         self.image = self.endTrophy["moving"][0]
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = sprite_mask(self.image)
         self.animation_count = 0
 
     def loop(self):
@@ -104,7 +104,7 @@ class EndTrophy(Object):
         self.animation_count += 1
         
         self.rect = self.image.get_rect(midbottom=trophy_anchor)
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = sprite_mask(self.image)
         
         if self.animation_count // self.ANIMATION_DELAY > len(sprites):
             self.animation_count = 0
@@ -126,7 +126,7 @@ class Fruit(Object):
             for sprite in source_fruit["Collected"]
         ]
         self.image = self.fruit["Strawberry"][0]
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = sprite_mask(self.image)
         self.animation_count = 0
         self.collected = False
         self.remove = False
@@ -147,7 +147,7 @@ class Fruit(Object):
             
         self.rect = self.image.get_rect(midbottom=fruit_anchor)
         if not self.collected:
-            self.mask = pygame.mask.from_surface(self.image)
+            self.mask = sprite_mask(self.image)
             
         if self.collected and self.animation_count >= self.ANIMATION_DELAY * len(sprites):
             self.remove = True
