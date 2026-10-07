@@ -34,6 +34,9 @@ class Player(pygame.sprite.Sprite):
         self.can_double_jump = True
 
     def apply_action(self, action: int):
+        # Shared controls for human and agent: left, right, jump, double jump, idle.
+        # Jump actions retain horizontal velocity; idle stops horizontal movement.
+        # Jump conditions enforce the same physical limits for both controllers.
         if action == 0:
             self.x_vel = -self.PLAYER_VEL
             self.direction = "left"

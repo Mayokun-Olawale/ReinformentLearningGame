@@ -25,10 +25,13 @@ def evaluate(model_path=MODEL_DIR / "dqn_platformer_best.zip", *, episodes=10,
     try:
         if model.observation_space != env.observation_space or model.action_space != env.action_space:
             raise ValueError("Model spaces do not match; retrain with the current observations")
+        # Default test seeds start at 200,000, outside training and validation.
         for episode in range(episodes):
             obs, _ = env.reset(seed=seed + episode)
             reward_sum, damage, ticks = 0.0, 0, 0
             while True:
+                # Choose the highest-valued action without random exploration.
+                # Evaluation executes the trained policy without updating weights.
                 action, _ = model.predict(obs, deterministic=True)
                 obs, reward, terminated, truncated, info = env.step(int(action))
                 reward_sum += reward
@@ -42,6 +45,8 @@ def evaluate(model_path=MODEL_DIR / "dqn_platformer_best.zip", *, episodes=10,
                                 outcome=env.unwrapped.game.player.end_reason))
     finally:
         env.close()
+    # Completion is the main outcome; fruit, damage, and distance help
+    # explain behavior. Reward alone does not prove the agent finished.
     summary = dict(
         completion_rate=sum(row["outcome"] == "completed" for row in results) / episodes,
         mean_reward=sum(row["reward"] for row in results) / episodes,

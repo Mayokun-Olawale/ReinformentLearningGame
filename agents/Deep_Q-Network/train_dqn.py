@@ -19,10 +19,13 @@ class TrainingCourses(gym.Wrapper):
         self.course_seed = 0
 
     def reset(self, *, seed=None, options=None):
+        # An explicit seed sets the starting course. Later episode resets
+        # advance seeds within the training range 0..99,999.
         if seed is not None:
             self.course_seed = seed % 100000
         course_seed = self.course_seed
         self.course_seed = (self.course_seed + 1) % 100000
+        # Rebuild the course and reset the player, preserving the model learning.
         return self.env.reset(seed=course_seed, options=options)
 
 
@@ -42,6 +45,7 @@ class Validation(BaseCallback):
         env = CourseTrainingEnv(randomize_obstacles=True)
         results = []
         try:
+            # Validation courses use seeds outside the training range.
             for seed in range(100000,100005):
                 obs,_ = env.reset(seed=seed)
                 while True:
@@ -53,6 +57,7 @@ class Validation(BaseCallback):
         finally:
             env.close()
         wins=sum(row['outcome']=='completed' for row in results)
+        # Rank checkpoints by completions and average forward progress.
         score=wins*10000+sum(row['progress'] for row in results)/5
         self.history.append(dict(steps=self.num_timesteps,wins=wins,courses=results))
         (self.folder/'validation.json').write_text(json.dumps(self.history,indent=2))
@@ -81,6 +86,10 @@ def train(randomize_obstacles=True, *, total_timesteps=500000, seed=7,
                 exploration_fraction=0.8,exploration_final_eps=0.1)
     (model_dir/'config.json').write_text(json.dumps(config,indent=2))
     try:
+        # Stable-Baselines3 supplies DQN learning and experience replay.
+        # MlpPolicy maps 51 observations through two 128-neuron hidden layers
+        # to five Q-values estimating discounted future reward per action.
+        # Exploration starts random and declines to a 10% random-action rate.
         model=DQN('MlpPolicy',env,learning_rate=0.0003,buffer_size=100000,
                   learning_starts=2000,batch_size=128,gamma=0.995,
                   train_freq=4,gradient_steps=1,target_update_interval=500,
@@ -97,6 +106,8 @@ def train(randomize_obstacles=True, *, total_timesteps=500000, seed=7,
         if total_timesteps<25000:
             callbacks.append(CheckpointCallback(checkpoint_freq,str(model_dir),'dqn_platformer'))
         print(f'Training {total_timesteps} decisions on randomized courses',flush=True)
+        # Collect transitions into replay memory and train on sampled batches.
+        # A timestep here is a model decision, containing up to four game ticks.
         model.learn(total_timesteps=total_timesteps,callback=CallbackList(callbacks),
                     reset_num_timesteps=resume is None)
         path=model_dir/'dqn_platformer_final.zip';model.save(path)

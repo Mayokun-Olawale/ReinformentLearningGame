@@ -56,6 +56,8 @@ class Level:
             and block.rect.x <= floor_right - block_size * 4
             and all(block.rect.x + offset * block_size in floor_by_x for offset in range(3))
         ]
+        # Create four guards at reset, distributed across valid floor stretches.
+        # There is no timer that spawns additional enemies during gameplay.
         enemy_starts = [
             valid_enemy_starts[index * (len(valid_enemy_starts) - 1) // 3]
             for index in range(4)
@@ -201,8 +203,12 @@ class GameEngine:
     TERRAIN_OFFSETS = (-384, -192, -96, -32, 32, 96, 192, 384)
 
     def get_state_vector(self):
+        # Convert live game objects into 51 numerical inputs; the agent sees
+        # these measurements rather than screenshots. No learning happens here.
         player = self.player
         rect = player.rect
+        # First eight values: player position, velocity, lives, time,
+        # grounded state, and double-jump availability. Divisions scale inputs.
         state = [
             rect.centerx / self.level.world_width, rect.centery / self.height,
             player.x_vel / 10.0, player.y_vel / 15.0,
@@ -214,6 +220,8 @@ class GameEngine:
                           (obj.rect.centerx - rect.centerx) ** 2 +
                           (obj.rect.centery - rect.centery) ** 2)[:count]
 
+        # Three fruit slots, each with relative x/y and a presence indicator.
+        # Empty slots are zero-filled so the network input size stays constant.
         fruits = nearest([fruit for fruit in self.level.fruits if not fruit.collected], 3)
         for index in range(3):
             if index < len(fruits):
@@ -222,6 +230,7 @@ class GameEngine:
                               (target.centery - rect.centery) / self.height, 1.0])
             else:
                 state.extend([0.0, 0.0, 0.0])
+        # Two guard slots: relative x/y, signed patrol velocity, and presence.
         enemies = nearest(self.level.hazards, 2)
         for index in range(2):
             if index < len(enemies):
@@ -240,6 +249,8 @@ class GameEngine:
             for block in source:
                 for column in range(block.rect.left // 96, (block.rect.right - 1) // 96 + 1):
                     self._terrain_columns.setdefault(column, []).append(block)
+        # Eight probes around the player describe floor below, closest
+        # platform height relative to the feet, and whether terrain exists.
         for offset in self.TERRAIN_OFFSETS:
             x = rect.centerx + offset
             platforms = [block for block in self._terrain_columns.get(x // 96, [])
@@ -250,6 +261,7 @@ class GameEngine:
                 state.extend([float(below), (closest.rect.top - rect.bottom) / self.height, 1.0])
             else:
                 state.extend([0.0, 0.0, 0.0])
+        # Last two values point toward the goal; clip all inputs to [-1, 1].
         state.extend([(self.level.goal.rect.centerx - rect.centerx) / self.level.world_width,
                       (self.level.goal.rect.centery - rect.centery) / self.height])
         return np.clip(state, -1.0, 1.0).tolist()
@@ -294,6 +306,8 @@ class PlatformerGameEnv(gym.Env):
                  character="PinkMan"):
         super().__init__()
         self.render_mode = render_mode
+        # Action IDs: 0 left, 1 right, 2 jump, 3 double jump, 4 idle.
+        # Fruit collection is a collision event, not a separate action.
         self.action_space = spaces.Discrete(5)
         self.observation_space = spaces.Box(-1.0, 1.0, shape=(GameEngine.OBSERVATION_SIZE,), dtype=np.float32)
         self.game = GameEngine(render_mode, randomize_obstacles,
@@ -315,12 +329,17 @@ class PlatformerGameEnv(gym.Env):
             raise gym.error.ResetNeeded("Call reset() before step()")
         if not self.action_space.contains(action):
             raise ValueError(f"Invalid action: {action}")
+        # Advance the real game by one tick. This executes an action;
+        # Stable-Baselines3, not this method, trains the DQN network.
         state, events, done = self.game.step(int(action))
         new_x = self.game.player.rect.centerx
+        # Reward only new furthest progress, preventing repeated rewards
+        # for walking back and forth through already visited positions.
         progress = max(0, new_x - self.furthest_x)
         self.furthest_x = max(self.furthest_x, new_x)
         self.progress_pixels += progress
         progress_reward = progress * 0.002
+        # Gameplay outcomes terminate; the time limit truncates the episode.
         terminated = bool(events["reached_goal"] or events["fell_off_map"]
                           or self.game.player.life_count <= 0)
         truncated = bool(events["time_expired"])
@@ -332,6 +351,8 @@ class PlatformerGameEnv(gym.Env):
                                        "progress_pixels": self.progress_pixels})
 
     def _compute_reward(self, events):
+        # Base environment reward. CourseTrainingEnv replaces this reward
+        # with the shaping used for DQN training.
         reward = float(events["picked_fruit"]) - float(events["took_hit"])
         if events["reached_goal"]:
             reward += 2.0
