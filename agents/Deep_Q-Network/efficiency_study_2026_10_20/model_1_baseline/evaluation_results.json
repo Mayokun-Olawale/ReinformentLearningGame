@@ -1,0 +1,921 @@
+{
+  "model": "/Users/mayokun/Personal_Project/ReinformentLearningGame/agents/Deep_Q-Network/efficiency_study_2026_10_20/model_1_baseline/saved_models/dqn_platformer_best.zip",
+  "randomize_obstacles": true,
+  "model_decisions": 125000,
+  "observation_size": 51,
+  "action_repeat": 4,
+  "seed_start": 400000,
+  "evaluation_fruit_reward": 2.0,
+  "summary": {
+    "completion_rate": 0.13,
+    "mean_reward": -56.402700000002234,
+    "mean_fruit": 4.11,
+    "mean_progress_pixels": 2859.4,
+    "mean_damage": 1.31,
+    "falls": 28,
+    "mean_ticks": 9487.67,
+    "timeouts": 38
+  },
+  "episodes": [
+    {
+      "seed": 400000,
+      "reward": -92.66000000000074,
+      "ticks": 13006,
+      "fruit": 5,
+      "damage": 1,
+      "progress_pixels": 3940.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400001,
+      "reward": 7.650000000000018,
+      "ticks": 435,
+      "fruit": 2,
+      "damage": 0,
+      "progress_pixels": 1800.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400002,
+      "reward": 9.640000000000015,
+      "ticks": 571,
+      "fruit": 2,
+      "damage": 3,
+      "progress_pixels": 2735.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400003,
+      "reward": -8.349999999999994,
+      "ticks": 905,
+      "fruit": 0,
+      "damage": 3,
+      "progress_pixels": 1670.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400004,
+      "reward": -143.5000000000075,
+      "ticks": 18000,
+      "fruit": 7,
+      "damage": 1,
+      "progress_pixels": 3450.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400005,
+      "reward": -140.85000000000824,
+      "ticks": 18000,
+      "fruit": 7,
+      "damage": 2,
+      "progress_pixels": 3915.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400006,
+      "reward": 124.8400000000004,
+      "ticks": 3576,
+      "fruit": 7,
+      "damage": 1,
+      "progress_pixels": 4860.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400007,
+      "reward": -160.80000000000393,
+      "ticks": 18000,
+      "fruit": 3,
+      "damage": 1,
+      "progress_pixels": 2520.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400008,
+      "reward": 21.2500000000001,
+      "ticks": 1450,
+      "fruit": 2,
+      "damage": 3,
+      "progress_pixels": 4775.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400009,
+      "reward": -161.6000000000038,
+      "ticks": 18000,
+      "fruit": 2,
+      "damage": 0,
+      "progress_pixels": 2440.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400010,
+      "reward": 9.340000000000014,
+      "ticks": 561,
+      "fruit": 2,
+      "damage": 3,
+      "progress_pixels": 2695.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400011,
+      "reward": 24.83999999999998,
+      "ticks": 1391,
+      "fruit": 4,
+      "damage": 3,
+      "progress_pixels": 4675.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400012,
+      "reward": 148.6799999999997,
+      "ticks": 1187,
+      "fruit": 8,
+      "damage": 2,
+      "progress_pixels": 4855.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400013,
+      "reward": 141.8399999999998,
+      "ticks": 1101,
+      "fruit": 4,
+      "damage": 2,
+      "progress_pixels": 4885.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400014,
+      "reward": 33.96999999999986,
+      "ticks": 1638,
+      "fruit": 9,
+      "damage": 1,
+      "progress_pixels": 4435.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400015,
+      "reward": -129.34000000000708,
+      "ticks": 15619,
+      "fruit": 2,
+      "damage": 1,
+      "progress_pixels": 3485.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400016,
+      "reward": 4.730000000000119,
+      "ticks": 987,
+      "fruit": 2,
+      "damage": 2,
+      "progress_pixels": 2460.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400017,
+      "reward": 149.68999999999974,
+      "ticks": 1306,
+      "fruit": 8,
+      "damage": 1,
+      "progress_pixels": 4875.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400018,
+      "reward": -66.84999999999872,
+      "ticks": 7785,
+      "fruit": 2,
+      "damage": 0,
+      "progress_pixels": 1700.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400019,
+      "reward": -2.699999999999953,
+      "ticks": 545,
+      "fruit": 1,
+      "damage": 3,
+      "progress_pixels": 1675.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400020,
+      "reward": -174.3500000000015,
+      "ticks": 18000,
+      "fruit": 1,
+      "damage": 0,
+      "progress_pixels": 1365.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400021,
+      "reward": 134.16000000000008,
+      "ticks": 1444,
+      "fruit": 2,
+      "damage": 2,
+      "progress_pixels": 4860.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400022,
+      "reward": -166.80000000000285,
+      "ticks": 18000,
+      "fruit": 2,
+      "damage": 1,
+      "progress_pixels": 2120.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400023,
+      "reward": -140.2500000000077,
+      "ticks": 18000,
+      "fruit": 5,
+      "damage": 0,
+      "progress_pixels": 3975.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400024,
+      "reward": 40.04999999999981,
+      "ticks": 1080,
+      "fruit": 11,
+      "damage": 3,
+      "progress_pixels": 4485.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400025,
+      "reward": 102.91000000000075,
+      "ticks": 6004,
+      "fruit": 8,
+      "damage": 1,
+      "progress_pixels": 4895.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400026,
+      "reward": 148.07999999999973,
+      "ticks": 1077,
+      "fruit": 7,
+      "damage": 2,
+      "progress_pixels": 4885.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400027,
+      "reward": 140.52000000000004,
+      "ticks": 1418,
+      "fruit": 5,
+      "damage": 2,
+      "progress_pixels": 4870.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400028,
+      "reward": 20.860000000000024,
+      "ticks": 759,
+      "fruit": 6,
+      "damage": 3,
+      "progress_pixels": 3245.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400029,
+      "reward": -131.25000000000674,
+      "ticks": 14655,
+      "fruit": 6,
+      "damage": 3,
+      "progress_pixels": 1930.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400030,
+      "reward": -153.3000000000056,
+      "ticks": 18000,
+      "fruit": 4,
+      "damage": 0,
+      "progress_pixels": 2870.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400031,
+      "reward": -177.30000000000098,
+      "ticks": 18000,
+      "fruit": 0,
+      "damage": 2,
+      "progress_pixels": 1670.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400032,
+      "reward": -72.99999999999852,
+      "ticks": 8895,
+      "fruit": 6,
+      "damage": 0,
+      "progress_pixels": 1395.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400033,
+      "reward": -172.75000000000176,
+      "ticks": 18000,
+      "fruit": 2,
+      "damage": 0,
+      "progress_pixels": 1325.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400034,
+      "reward": -47.679999999998586,
+      "ticks": 9328,
+      "fruit": 9,
+      "damage": 1,
+      "progress_pixels": 3960.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400035,
+      "reward": 147.25999999999976,
+      "ticks": 1144,
+      "fruit": 7,
+      "damage": 2,
+      "progress_pixels": 4870.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400036,
+      "reward": -162.80000000000356,
+      "ticks": 18000,
+      "fruit": 3,
+      "damage": 2,
+      "progress_pixels": 2520.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400037,
+      "reward": -147.90000000000632,
+      "ticks": 18000,
+      "fruit": 6,
+      "damage": 1,
+      "progress_pixels": 3210.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400038,
+      "reward": -140.25000000000776,
+      "ticks": 18000,
+      "fruit": 5,
+      "damage": 0,
+      "progress_pixels": 3975.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400039,
+      "reward": -115.54000000000511,
+      "ticks": 12579,
+      "fruit": 3,
+      "damage": 0,
+      "progress_pixels": 1425.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400040,
+      "reward": -143.30000000000712,
+      "ticks": 18000,
+      "fruit": 4,
+      "damage": 0,
+      "progress_pixels": 3870.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400041,
+      "reward": -159.60000000000414,
+      "ticks": 18000,
+      "fruit": 4,
+      "damage": 1,
+      "progress_pixels": 2440.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400042,
+      "reward": -164.35000000000343,
+      "ticks": 17265,
+      "fruit": 3,
+      "damage": 3,
+      "progress_pixels": 1830.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400043,
+      "reward": -145.5500000000067,
+      "ticks": 18000,
+      "fruit": 6,
+      "damage": 1,
+      "progress_pixels": 3445.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400044,
+      "reward": -159.10000000000423,
+      "ticks": 18000,
+      "fruit": 5,
+      "damage": 1,
+      "progress_pixels": 2290.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400045,
+      "reward": -0.4799999999999951,
+      "ticks": 188,
+      "fruit": 2,
+      "damage": 1,
+      "progress_pixels": 940.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400046,
+      "reward": -155.85000000000508,
+      "ticks": 18000,
+      "fruit": 2,
+      "damage": 0,
+      "progress_pixels": 3015.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400047,
+      "reward": -164.440000000003,
+      "ticks": 17479,
+      "fruit": 3,
+      "damage": 1,
+      "progress_pixels": 1635.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400048,
+      "reward": -163.20000000000348,
+      "ticks": 18000,
+      "fruit": 4,
+      "damage": 1,
+      "progress_pixels": 2080.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400049,
+      "reward": -173.70000000000118,
+      "ticks": 18000,
+      "fruit": 4,
+      "damage": 1,
+      "progress_pixels": 1030.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400050,
+      "reward": -154.0000000000055,
+      "ticks": 18000,
+      "fruit": 6,
+      "damage": 2,
+      "progress_pixels": 2800.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400051,
+      "reward": -159.8500000000041,
+      "ticks": 18000,
+      "fruit": 3,
+      "damage": 0,
+      "progress_pixels": 2415.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400052,
+      "reward": -4.9899999999999975,
+      "ticks": 184,
+      "fruit": 0,
+      "damage": 0,
+      "progress_pixels": 685.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400053,
+      "reward": 0.28000000000000647,
+      "ticks": 312,
+      "fruit": 0,
+      "damage": 1,
+      "progress_pixels": 1540.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400054,
+      "reward": 23.539999999999928,
+      "ticks": 1176,
+      "fruit": 3,
+      "damage": 3,
+      "progress_pixels": 4530.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400055,
+      "reward": -147.95000000000624,
+      "ticks": 18000,
+      "fruit": 7,
+      "damage": 2,
+      "progress_pixels": 3205.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400056,
+      "reward": 17.660000000000082,
+      "ticks": 974,
+      "fruit": 3,
+      "damage": 1,
+      "progress_pixels": 3340.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400057,
+      "reward": -161.30000000000382,
+      "ticks": 18000,
+      "fruit": 6,
+      "damage": 0,
+      "progress_pixels": 1670.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400058,
+      "reward": 33.89999999999981,
+      "ticks": 1115,
+      "fruit": 7,
+      "damage": 3,
+      "progress_pixels": 4705.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400059,
+      "reward": 11.220000000000049,
+      "ticks": 568,
+      "fruit": 5,
+      "damage": 1,
+      "progress_pixels": 1890.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400060,
+      "reward": -160.05000000000405,
+      "ticks": 18000,
+      "fruit": 5,
+      "damage": 1,
+      "progress_pixels": 2195.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400061,
+      "reward": -173.55000000000163,
+      "ticks": 18000,
+      "fruit": 1,
+      "damage": 0,
+      "progress_pixels": 1445.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400062,
+      "reward": -144.2500000000069,
+      "ticks": 18000,
+      "fruit": 6,
+      "damage": 1,
+      "progress_pixels": 3575.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400063,
+      "reward": 10.110000000000037,
+      "ticks": 619,
+      "fruit": 1,
+      "damage": 0,
+      "progress_pixels": 2430.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400064,
+      "reward": -147.54000000000622,
+      "ticks": 16664,
+      "fruit": 6,
+      "damage": 3,
+      "progress_pixels": 2310.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400065,
+      "reward": -157.25000000000514,
+      "ticks": 18000,
+      "fruit": 5,
+      "damage": 1,
+      "progress_pixels": 2675.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400066,
+      "reward": 20.090000000000174,
+      "ticks": 2181,
+      "fruit": 6,
+      "damage": 3,
+      "progress_pixels": 4590.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400067,
+      "reward": 149.4899999999999,
+      "ticks": 1511,
+      "fruit": 9,
+      "damage": 1,
+      "progress_pixels": 4860.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400068,
+      "reward": -7.68,
+      "ticks": 68,
+      "fruit": 0,
+      "damage": 0,
+      "progress_pixels": 300.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400069,
+      "reward": 20.130000000000017,
+      "ticks": 677,
+      "fruit": 6,
+      "damage": 3,
+      "progress_pixels": 3090.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400070,
+      "reward": 149.01999999999975,
+      "ticks": 1153,
+      "fruit": 7,
+      "damage": 1,
+      "progress_pixels": 4855.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400071,
+      "reward": 34.00999999999978,
+      "ticks": 1104,
+      "fruit": 7,
+      "damage": 3,
+      "progress_pixels": 4705.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400072,
+      "reward": 0.9300000000002644,
+      "ticks": 1732,
+      "fruit": 3,
+      "damage": 3,
+      "progress_pixels": 2825.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400073,
+      "reward": -71.5699999999985,
+      "ticks": 9217,
+      "fruit": 5,
+      "damage": 3,
+      "progress_pixels": 2660.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400074,
+      "reward": 5.190000000000017,
+      "ticks": 351,
+      "fruit": 3,
+      "damage": 1,
+      "progress_pixels": 1470.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400075,
+      "reward": 146.38999999999976,
+      "ticks": 1066,
+      "fruit": 6,
+      "damage": 2,
+      "progress_pixels": 4905.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400076,
+      "reward": -5.43999999999977,
+      "ticks": 1874,
+      "fruit": 2,
+      "damage": 2,
+      "progress_pixels": 2330.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400077,
+      "reward": -30.539999999999626,
+      "ticks": 3704,
+      "fruit": 3,
+      "damage": 3,
+      "progress_pixels": 1650.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400078,
+      "reward": 3.43000000000006,
+      "ticks": 612,
+      "fruit": 1,
+      "damage": 0,
+      "progress_pixels": 1755.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400079,
+      "reward": 15.890000000000025,
+      "ticks": 1211,
+      "fruit": 5,
+      "damage": 3,
+      "progress_pixels": 3400.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400080,
+      "reward": 9.430000000000016,
+      "ticks": 442,
+      "fruit": 3,
+      "damage": 1,
+      "progress_pixels": 1985.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400081,
+      "reward": 19.00000000000004,
+      "ticks": 735,
+      "fruit": 6,
+      "damage": 3,
+      "progress_pixels": 3035.0,
+      "outcome": "defeated"
+    },
+    {
+      "seed": 400082,
+      "reward": -98.65000000000266,
+      "ticks": 9785,
+      "fruit": 0,
+      "damage": 0,
+      "progress_pixels": 920.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400083,
+      "reward": -107.51000000000359,
+      "ticks": 13311,
+      "fruit": 3,
+      "damage": 1,
+      "progress_pixels": 3160.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400084,
+      "reward": -179.35000000000056,
+      "ticks": 18000,
+      "fruit": 2,
+      "damage": 0,
+      "progress_pixels": 665.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400085,
+      "reward": -179.3500000000005,
+      "ticks": 18000,
+      "fruit": 3,
+      "damage": 0,
+      "progress_pixels": 465.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400086,
+      "reward": -172.50000000000185,
+      "ticks": 18000,
+      "fruit": 3,
+      "damage": 0,
+      "progress_pixels": 1150.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400087,
+      "reward": -128.5000000000072,
+      "ticks": 13655,
+      "fruit": 2,
+      "damage": 0,
+      "progress_pixels": 1405.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400088,
+      "reward": -109.02000000000403,
+      "ticks": 12417,
+      "fruit": 3,
+      "damage": 2,
+      "progress_pixels": 2315.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400089,
+      "reward": -156.0000000000048,
+      "ticks": 18000,
+      "fruit": 2,
+      "damage": 1,
+      "progress_pixels": 3200.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400090,
+      "reward": -131.37000000000745,
+      "ticks": 15022,
+      "fruit": 3,
+      "damage": 0,
+      "progress_pixels": 2285.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400091,
+      "reward": 5.240000000000023,
+      "ticks": 476,
+      "fruit": 1,
+      "damage": 1,
+      "progress_pixels": 2000.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400092,
+      "reward": -139.5000000000079,
+      "ticks": 18000,
+      "fruit": 8,
+      "damage": 1,
+      "progress_pixels": 3650.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400093,
+      "reward": -159.95000000000408,
+      "ticks": 18000,
+      "fruit": 5,
+      "damage": 0,
+      "progress_pixels": 2005.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400094,
+      "reward": 141.54999999999993,
+      "ticks": 1525,
+      "fruit": 5,
+      "damage": 1,
+      "progress_pixels": 4880.0,
+      "outcome": "completed"
+    },
+    {
+      "seed": 400095,
+      "reward": -31.029999999999564,
+      "ticks": 3948,
+      "fruit": 3,
+      "damage": 0,
+      "progress_pixels": 1245.0,
+      "outcome": "fell"
+    },
+    {
+      "seed": 400096,
+      "reward": -144.25000000000702,
+      "ticks": 18000,
+      "fruit": 4,
+      "damage": 1,
+      "progress_pixels": 3975.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400097,
+      "reward": -155.80000000000481,
+      "ticks": 18000,
+      "fruit": 5,
+      "damage": 2,
+      "progress_pixels": 2820.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400098,
+      "reward": -167.1500000000028,
+      "ticks": 18000,
+      "fruit": 2,
+      "damage": 1,
+      "progress_pixels": 2085.0,
+      "outcome": "time_expired"
+    },
+    {
+      "seed": 400099,
+      "reward": -141.8000000000075,
+      "ticks": 18000,
+      "fruit": 7,
+      "damage": 1,
+      "progress_pixels": 3620.0,
+      "outcome": "time_expired"
+    }
+  ]
+}

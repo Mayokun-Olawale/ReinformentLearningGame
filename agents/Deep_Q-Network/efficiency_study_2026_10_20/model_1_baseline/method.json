@@ -1,0 +1,11 @@
+{
+  "id": "model_1_baseline",
+  "name": "Original DQN",
+  "method": "Original 51 inputs",
+  "source": "saved_models",
+  "legacy": true,
+  "repeat": 4,
+  "rate": 0.0003,
+  "curriculum": false,
+  "fruit": 2
+}

@@ -1,0 +1,20 @@
+{
+  "randomize_obstacles": true,
+  "action_repeat": 4,
+  "seed": 7,
+  "steps": 475000,
+  "training_seeds": [
+    0,
+    99999
+  ],
+  "validation_seeds": [
+    100000,
+    100004
+  ],
+  "exploration_fraction": 0.8,
+  "exploration_final_eps": 0.1,
+  "resumed_from_decisions": 25000,
+  "final_model_decisions": 500000,
+  "selected_model_decisions": 125000,
+  "replay_buffer_rebuilt_on_resume": true
+}
