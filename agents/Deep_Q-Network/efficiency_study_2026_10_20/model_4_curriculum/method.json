@@ -1,0 +1,9 @@
+{
+  "id": "model_4_curriculum",
+  "name": "Curriculum",
+  "method": "Gap features + gradually harder training courses",
+  "repeat": 4,
+  "rate": 0.0003,
+  "curriculum": true,
+  "fruit": 2
+}
