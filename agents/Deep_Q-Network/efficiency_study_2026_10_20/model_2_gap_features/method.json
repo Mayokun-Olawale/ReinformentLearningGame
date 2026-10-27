@@ -1,0 +1,10 @@
+{
+  "id": "model_2_gap_features",
+  "name": "Gap features",
+  "method": "Exact gap and landing observations (60 inputs)",
+  "source": "model_2_gap_features/saved_models",
+  "repeat": 4,
+  "rate": 0.0003,
+  "curriculum": false,
+  "fruit": 2
+}
