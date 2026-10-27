@@ -1,0 +1,18 @@
+{
+  "randomize_obstacles": true,
+  "action_repeat": 4,
+  "seed": 7,
+  "steps": 500000,
+  "observation_size": 60,
+  "observation_version": "gap_geometry_v1",
+  "training_seeds": [
+    0,
+    99999
+  ],
+  "validation_seeds": [
+    100000,
+    100004
+  ],
+  "exploration_fraction": 0.8,
+  "exploration_final_eps": 0.1
+}

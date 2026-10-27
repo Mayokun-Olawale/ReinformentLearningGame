@@ -1,0 +1,15 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "agents/Deep_Q-Network/saved_models/config.json": "ebc3f02b6cdb65c52362f7b68582734b391e70386a4d7c82f210d32a8e772790",
+    "agents/Deep_Q-Network/saved_models/dqn_platformer_best.zip": "36f9f4cbe162f69db3a5422078db0064f0c287ec61e667db2fe614dfbc34b95b",
+    "agents/Deep_Q-Network/saved_models/validation.json": "56876c7389a76a16fa8f25f94164172411c401a0a5d7a8551203e8030a27ac10",
+    "agents/Deep_Q-Network/saved_models/dqn_platformer_final.zip": "2d5904703dedc6cab41ade751b5f88a3941a13bb91d545701cdb85bd4cea3929",
+    "agents/Deep_Q-Network/tensorboard_logs/episodes.monitor.csv": "1f101184467ab3aa5fde264c7e94936b95b868f4b994cb34cb2eef8cc81b3c9b",
+    "agents/Deep_Q-Network/walkthrough/walkthrough.gif": "b76ab00abe8e124b3a0ab73fa048015db81c06b46e7a268a90f63269e1162e9b",
+    "agents/Deep_Q-Network/walkthrough/walkthrough.json": "6228e149f6a10c7f6fa0e916e94e4ecde0315b0d316d9e2ee9b609fc148f9adc",
+    "agents/Deep_Q-Network/evaluation_results.json": "9389b69fc95b0734263571f33788015730505a69154588afc63f60e4870c184d",
+    "agents/Deep_Q-Network/training_results.png": "13cb3c8cd3f0238a93700b1da43168e02d830f482535e372e191facd7cbded47"
+  },
+  "verified_unchanged": true
+}
