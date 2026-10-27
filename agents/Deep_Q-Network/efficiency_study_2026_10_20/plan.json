@@ -1,0 +1,90 @@
+{
+  "seed": 7,
+  "nominal_physics_tick_budget": 2000000,
+  "validation_seeds": [
+    100000,
+    100004
+  ],
+  "validation_every_nominal_ticks": 100000,
+  "test_seeds": [
+    400000,
+    400099
+  ],
+  "episodes": 100,
+  "evaluation_fruit_reward": 2,
+  "checkpoint_selection": "validation completions, then mean progress",
+  "variants": [
+    {
+      "id": "model_1_baseline",
+      "name": "Original DQN",
+      "method": "Original 51 inputs",
+      "source": "saved_models",
+      "legacy": true,
+      "repeat": 4,
+      "rate": 0.0003,
+      "curriculum": false,
+      "fruit": 2
+    },
+    {
+      "id": "model_2_gap_features",
+      "name": "Gap features",
+      "method": "Exact gap and landing observations (60 inputs)",
+      "source": "model_2_gap_features/saved_models",
+      "repeat": 4,
+      "rate": 0.0003,
+      "curriculum": false,
+      "fruit": 2
+    },
+    {
+      "id": "model_3_two_tick",
+      "name": "Two-tick decisions",
+      "method": "Gap features + decisions every two physics ticks",
+      "repeat": 2,
+      "rate": 0.0003,
+      "curriculum": false,
+      "fruit": 2
+    },
+    {
+      "id": "model_4_curriculum",
+      "name": "Curriculum",
+      "method": "Gap features + gradually harder training courses",
+      "repeat": 4,
+      "rate": 0.0003,
+      "curriculum": true,
+      "fruit": 2
+    },
+    {
+      "id": "model_5_lower_learning_rate",
+      "name": "Lower learning rate",
+      "method": "Gap features + learning rate 0.0001 instead of 0.0003",
+      "repeat": 4,
+      "rate": 0.0001,
+      "curriculum": false,
+      "fruit": 2
+    },
+    {
+      "id": "model_6_fruit_reward",
+      "name": "Larger fruit bonus",
+      "method": "Gap features + training fruit bonus 4 instead of 2",
+      "repeat": 4,
+      "rate": 0.0003,
+      "curriculum": false,
+      "fruit": 4
+    },
+    {
+      "id": "model_7_combined",
+      "name": "Combined methods",
+      "method": "Gap features + two-tick decisions + curriculum + lower learning rate + fruit bonus 4",
+      "repeat": 2,
+      "rate": 0.0001,
+      "curriculum": true,
+      "fruit": 4
+    }
+  ],
+  "limitations": [
+    "One training seed per method",
+    "Two-tick runs use twice as many decisions and gradient updates for a comparable nominal physics budget",
+    "The original baseline was resumed during its historical training run",
+    "Rewards in the fruit-bonus training logs differ; test rewards always use the original formula"
+  ]
+}

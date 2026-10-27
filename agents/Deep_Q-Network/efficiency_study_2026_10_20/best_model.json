@@ -1,0 +1,21 @@
+{
+  "model": "model_4_curriculum",
+  "checkpoint": "agents/Deep_Q-Network/efficiency_study_2026_10_20/model_4_curriculum/saved_models/dqn_platformer_best.zip",
+  "checkpoint_sha256": "6777a8f0ea0be707f4297a9efdef9eb66952cd4f408a84001152d4867cd5bef3",
+  "also_best_mean_reward": true,
+  "metrics": {
+    "completion_rate": 0.6,
+    "mean_reward": 93.73969999999987,
+    "mean_fruit": 4.99,
+    "mean_progress_pixels": 4049.42,
+    "mean_damage": 1.52,
+    "falls": 22,
+    "mean_ticks": 967.45,
+    "timeouts": 0,
+    "completions": 60,
+    "defeats": 18,
+    "completed_mean_ticks": 1133.9666666666667,
+    "completed_mean_fruit": 6.183333333333334
+  },
+  "scope": "Observed best on this 100-course benchmark; one training seed per method"
+}
