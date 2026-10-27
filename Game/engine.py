@@ -18,7 +18,10 @@ class Level:
         self.width, self.height = width, height
         self.reset_level()
 
-    def reset_level(self, randomize=False, rng=None):
+    def reset_level(self, randomize=False, rng=None, difficulty=1.0):
+        if not 0 <= difficulty <= 1:
+            raise ValueError("difficulty must be between 0 and 1")
+        self.difficulty = difficulty
         rng = rng if randomize and rng is not None else random.Random(0)
         block_size = 96
         floor = [Block(i * block_size, self.height-block_size, block_size) for i in range(0, self.width*5//block_size)]
@@ -44,7 +47,7 @@ class Level:
 
         floor_left = startFlag.rect.left
         floor_right = floor[-1].rect.right
-        for i in range(5):
+        for i in range(round(5 * difficulty)):
             idx = rng.randint(5,len(floor) - 4)
             floor.pop(idx)
 
@@ -58,9 +61,10 @@ class Level:
         ]
         # Create four guards at reset, distributed across valid floor stretches.
         # There is no timer that spawns additional enemies during gameplay.
+        guard_count = round(4 * difficulty)
         enemy_starts = [
-            valid_enemy_starts[index * (len(valid_enemy_starts) - 1) // 3]
-            for index in range(4)
+            valid_enemy_starts[index * (len(valid_enemy_starts) - 1) // max(1, guard_count - 1)]
+            for index in range(guard_count)
         ]
         enemies = [
             Enemy(x, self.height - block_size - 64, 32, 32)
@@ -124,8 +128,8 @@ class GameEngine:
         self.background = pygame.image.load(str(Path(ASSET_DIR) / "Background" / "Pink.png"))
         self.reset()
 
-    def reset(self, rng=None):
-        self.level.reset_level(self.randomize_obstacles, rng)
+    def reset(self, rng=None, difficulty=1.0):
+        self.level.reset_level(self.randomize_obstacles, rng, difficulty=difficulty)
         self.player.reset_state(self.level.spawn_x, self.level.spawn_y)
         self.time_remaining = self.max_time
         self.state_events = dict.fromkeys(
@@ -199,11 +203,11 @@ class GameEngine:
         self.state_events = events
         return self.get_state_vector(), events.copy(), player.finished
 
-    OBSERVATION_SIZE = 51
+    OBSERVATION_SIZE = 60
     TERRAIN_OFFSETS = (-384, -192, -96, -32, 32, 96, 192, 384)
 
-    def get_state_vector(self):
-        # Convert live game objects into 51 numerical inputs; the agent sees
+    def get_state_vector(self): #demo
+        # Convert live game objects into numerical inputs; the agent sees
         # these measurements rather than screenshots. No learning happens here.
         player = self.player
         rect = player.rect
@@ -249,6 +253,16 @@ class GameEngine:
             for block in source:
                 for column in range(block.rect.left // 96, (block.rect.right - 1) // 96 + 1):
                     self._terrain_columns.setdefault(column, []).append(block)
+            # Merge touching floor tiles so tile boundaries aren't treated as gaps.
+            floor = sorted((b.rect.left, b.rect.right) for b in source
+                           if b.rect.top == self.height - 96)
+            stretches = []
+            for left, right in floor:
+                if stretches and left <= stretches[-1][1]:
+                    stretches[-1][1] = max(stretches[-1][1], right)
+                else:
+                    stretches.append([left, right])
+            self._floor_gaps = [(a[1], b[0]) for a, b in zip(stretches, stretches[1:])]
         # Eight probes around the player describe floor below, closest
         # platform height relative to the feet, and whether terrain exists.
         for offset in self.TERRAIN_OFFSETS:
@@ -264,6 +278,29 @@ class GameEngine:
         # Last two values point toward the goal; clip all inputs to [-1, 1].
         state.extend([(self.level.goal.rect.centerx - rect.centerx) / self.level.world_width,
                       (self.level.goal.rect.centery - rect.centery) / self.height])
+        # Exact next floor gap to the right, including one currently underneath.
+        # Signed edge distance becomes negative once the player enters the gap.
+        gap = next(((left, right) for left, right in self._floor_gaps
+                    if right > rect.centerx), None)
+        if gap is None:
+            state.extend([0.0] * 5)
+        else:
+            left, right = gap
+            state.extend([1.0, (left - rect.centerx) / self.width,
+                          (right - left) / self.width,
+                          (right - rect.centerx) / self.width,
+                          (self.height - 96 - rect.bottom) / self.height])
+        # Nearest raised platform whose leading edge is still ahead. This is
+        # geometry, not a claim that a particular jump can reach that platform.
+        ahead = [b.rect for b in source
+                 if b.rect.left >= rect.centerx and b.rect.top < self.height - 96]
+        if ahead:
+            landing = min(ahead, key=lambda target: (target.left, abs(target.top - rect.bottom)))
+            state.extend([1.0, (landing.left - rect.centerx) / self.width,
+                          (landing.top - rect.bottom) / self.height,
+                          landing.width / self.width])
+        else:
+            state.extend([0.0] * 4)
         return np.clip(state, -1.0, 1.0).tolist()
 
     def render(self):
@@ -316,7 +353,9 @@ class PlatformerGameEnv(gym.Env):
 
     def reset(self, *, seed=None, options=None):
         super().reset(seed=seed)
-        state = self.game.reset(rng=random.Random(int(self.np_random.integers(0, 2**63))))
+        difficulty = (options or {}).get("difficulty", 1.0)
+        state = self.game.reset(rng=random.Random(int(self.np_random.integers(0, 2**63))),
+                                difficulty=difficulty)
         self.furthest_x = self.game.player.rect.centerx
         self.progress_pixels = 0.0
         self._has_reset = True
@@ -324,13 +363,12 @@ class PlatformerGameEnv(gym.Env):
             self.render()
         return np.asarray(state, dtype=np.float32), {}
 
-    def step(self, action):
+    def step(self, action): #demo
         if not self._has_reset:
             raise gym.error.ResetNeeded("Call reset() before step()")
         if not self.action_space.contains(action):
             raise ValueError(f"Invalid action: {action}")
         # Advance the real game by one tick. This executes an action;
-        # Stable-Baselines3, not this method, trains the DQN network.
         state, events, done = self.game.step(int(action))
         new_x = self.game.player.rect.centerx
         # Reward only new furthest progress, preventing repeated rewards

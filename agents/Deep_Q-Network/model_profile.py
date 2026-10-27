@@ -9,7 +9,7 @@ def action_repeat_for(model_path):
     for candidate in (parent / "config.json", parent.parent / "config.json"):
         if candidate.exists():
             repeat = int(json.loads(candidate.read_text()).get("action_repeat", 1))
-            if repeat not in (1, 4):
+            if repeat not in (1, 2, 4):
                 raise ValueError(f"Unsupported saved action_repeat: {repeat}")
             return repeat
     return 1

@@ -20,9 +20,9 @@ def test_get_human_action_maps_pygame_jump_event():
 def test_game_engine_step_returns_vector_and_events():
     engine = GameEngine(render_mode=None, randomize_obstacles=False)
     state = engine.reset()
-    assert len(state) == 51
+    assert len(state) == 60
     state, events, done = engine.step(4)
-    assert len(state) == 51
+    assert len(state) == 60
     assert isinstance(events, dict)
     assert set(events).issuperset({"picked_fruit", "took_hit", "reached_goal", "fell_off_map", "time_expired"})
     assert isinstance(done, bool)
@@ -70,10 +70,10 @@ def test_engine_stays_headless_when_render_mode_is_none():
 def test_env_reset_and_step_are_compatible_with_gymnasium():
     env = PlatformerGameEnv(render_mode=None, randomize_obstacles=False)
     obs, info = env.reset(seed=123)
-    assert obs.shape == (51,)
+    assert obs.shape == (60,)
     assert isinstance(info, dict)
     obs, reward, terminated, truncated, info = env.step(4)
-    assert obs.shape == (51,)
+    assert obs.shape == (60,)
     assert isinstance(reward, (float, int, np.floating))
     assert isinstance(terminated, bool)
     assert isinstance(truncated, bool)
@@ -347,6 +347,41 @@ def test_terrain_observation_distinguishes_floor_gap_and_raised_platform():
     assert state[index:index + 3] == [1.0, 0.0, 1.0]
     engine.level.platforms = []
     assert engine.get_state_vector()[25:49] == [0.0] * 24
+
+
+def test_exact_gap_features_merge_tiles_and_track_crossing():
+    from Game.gameObject import Block
+    engine = GameEngine()
+    floor_y = engine.height - 96
+    engine.level.platforms = [Block(x, floor_y, 96) for x in (0, 96, 288, 384)]
+    engine.player.rect.centerx = 150
+    engine.player.rect.bottom = floor_y
+    np.testing.assert_allclose(engine.get_state_vector()[51:56],
+                               [1, 42 / engine.width, 96 / engine.width,
+                                138 / engine.width, 0])
+    engine.player.rect.centerx = 240
+    assert engine.get_state_vector()[52] == -48 / engine.width
+    engine.player.rect.centerx = 288
+    assert engine.get_state_vector()[51:56] == [0] * 5
+    # Reset rebuilds cached geometry for the newly generated course.
+    engine.reset()
+    assert engine.get_state_vector()[51] == 1
+
+
+def test_exact_platform_features_and_missing_geometry():
+    from Game.gameObject import Block
+    engine = GameEngine()
+    engine.player.rect.centerx = 200
+    engine.player.rect.bottom = 704
+    engine.level.platforms = [Block(480, 464, 96), Block(288, 464, 96),
+                              Block(96, 464, 96)]
+    np.testing.assert_allclose(engine.get_state_vector()[56:60],
+                               [1, 88 / engine.width, -240 / engine.height,
+                                96 / engine.width])
+    engine.level.platforms = []
+    assert engine.get_state_vector()[51:60] == [0] * 9
+    engine.level.platforms = [Block(0, 704, 96), Block(96, 704, 96)]
+    assert engine.get_state_vector()[51:60] == [0] * 9
 
 
 def test_progress_rewards_only_new_furthest_position_and_resets():
