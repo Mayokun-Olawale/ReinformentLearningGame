@@ -1,0 +1,19 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "README.md": "c8bfaefa33ccce95d3e876bd6899ba2df3731207c280fe324a3985644d904eca",
+    "evaluation_console.log": "9622e5ac56361caf15db2e82e25b60536596423c150151ece0e296f519c6f96e",
+    "evaluation_results.json": "20e7290604567f96c460553d47556d170b7e331f829586faac4fb50ee9f10365",
+    "method.json": "bc01161c63faed4144fe085cc13b20ec6f0fc77c1bc667b5526a8ee1d5a17f0a",
+    "recording_console.log": "5951a92177e7796307126678ed914b9175691d11380d1c45fb021e98cffcc870",
+    "saved_models/config.json": "f32896ff2449012de66cf512b0cc60a120f53fe74aa2e86d30cb44f7a2dbccaf",
+    "saved_models/dqn_platformer_best.zip": "e3c0ed43bc5194c70a8e20f254aeebdc6e4cafbacf3c5f880edf5cc835c12f04",
+    "saved_models/dqn_platformer_final.zip": "a2bcfa797a4cd6f33823389eb2c872c9789ece7b03162a5f4aef3f7fae00cff1",
+    "saved_models/validation.json": "0e73ce23e6693a4f906a62c0d085d5e0840353a88a088513a6e5890de3ebb2ec",
+    "tensorboard_logs/episodes.monitor.csv": "7dde181b6130ed98c2be8b93150c193be5f9e2aef2fd0088ba9fb3947522bb0d",
+    "training_console.log": "43f5ff3ed5efdcce5bb2a55c18cbce1c29bdcada636ef5c9b86913e2931577b5",
+    "training_results.png": "7b544e342729ad01e09929b73d97ed2a94c0397a8890769975f2b7bc06a36526",
+    "walkthrough/walkthrough.gif": "0b69c0bc3bc6905e87065215eb0d57123c3be4fa808b34106e15a4dad5ac02e1",
+    "walkthrough/walkthrough.json": "477f2e1b15aac175781d06f3bae525e26ff482756c7fec96da60115cf5313823"
+  }
+}
