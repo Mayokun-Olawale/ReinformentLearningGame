@@ -1,0 +1,722 @@
+[
+  {
+    "steps": 25000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "fell",
+        "progress": 3370.0,
+        "reward": 19.880000000000074
+      },
+      {
+        "seed": 100001,
+        "outcome": "defeated",
+        "progress": 965.0,
+        "reward": -9.829999999999998
+      },
+      {
+        "seed": 100002,
+        "outcome": "time_expired",
+        "progress": 610.0,
+        "reward": -183.8999999999997
+      },
+      {
+        "seed": 100003,
+        "outcome": "fell",
+        "progress": 1180.0,
+        "reward": -0.5399999999999903
+      },
+      {
+        "seed": 100004,
+        "outcome": "time_expired",
+        "progress": 1345.0,
+        "reward": -168.5500000000025
+      }
+    ]
+  },
+  {
+    "steps": 50000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "time_expired",
+        "progress": 1540.0,
+        "reward": -172.60000000000178
+      },
+      {
+        "seed": 100001,
+        "outcome": "time_expired",
+        "progress": 555.0,
+        "reward": -180.45000000000067
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 2005.0,
+        "reward": -31.06999999999962
+      },
+      {
+        "seed": 100003,
+        "outcome": "fell",
+        "progress": 700.0,
+        "reward": -42.299999999999486
+      },
+      {
+        "seed": 100004,
+        "outcome": "time_expired",
+        "progress": 1375.0,
+        "reward": -174.2500000000015
+      }
+    ]
+  },
+  {
+    "steps": 75000,
+    "wins": 1,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "completed",
+        "progress": 4860.0,
+        "reward": 153.51999999999987
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 525.0,
+        "reward": -6.3199999999999985
+      },
+      {
+        "seed": 100002,
+        "outcome": "time_expired",
+        "progress": 4540.0,
+        "reward": -134.60000000000758
+      },
+      {
+        "seed": 100003,
+        "outcome": "time_expired",
+        "progress": 4175.0,
+        "reward": -142.25000000000733
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 4385.0,
+        "reward": -15.049999999999411
+      }
+    ]
+  },
+  {
+    "steps": 100000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "time_expired",
+        "progress": 4560.0,
+        "reward": -126.40000000000629
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 580.0,
+        "reward": -3.849999999999997
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 2950.0,
+        "reward": 13.870000000000054
+      },
+      {
+        "seed": 100003,
+        "outcome": "defeated",
+        "progress": 3015.0,
+        "reward": 14.740000000000027
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 4305.0,
+        "reward": 31.789999999999893
+      }
+    ]
+  },
+  {
+    "steps": 125000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 2405.0,
+        "reward": -156.23000000000704
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 580.0,
+        "reward": -5.019999999999998
+      },
+      {
+        "seed": 100002,
+        "outcome": "time_expired",
+        "progress": 920.0,
+        "reward": -178.8000000000007
+      },
+      {
+        "seed": 100003,
+        "outcome": "time_expired",
+        "progress": 730.0,
+        "reward": -182.69999999999993
+      },
+      {
+        "seed": 100004,
+        "outcome": "time_expired",
+        "progress": 2205.0,
+        "reward": -165.950000000003
+      }
+    ]
+  },
+  {
+    "steps": 150000,
+    "wins": 1,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 3715.0,
+        "reward": 22.739999999999974
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 560.0,
+        "reward": -167.84000000000287
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 3105.0,
+        "reward": 15.94000000000003
+      },
+      {
+        "seed": 100003,
+        "outcome": "completed",
+        "progress": 4928.0,
+        "reward": 146.43999999999983
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 4615.0,
+        "reward": 32.17999999999986
+      }
+    ]
+  },
+  {
+    "steps": 175000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "time_expired",
+        "progress": 3210.0,
+        "reward": -149.90000000000637
+      },
+      {
+        "seed": 100001,
+        "outcome": "time_expired",
+        "progress": 515.0,
+        "reward": -180.85000000000062
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 2940.0,
+        "reward": 15.030000000000022
+      },
+      {
+        "seed": 100003,
+        "outcome": "fell",
+        "progress": 680.0,
+        "reward": -56.969999999999175
+      },
+      {
+        "seed": 100004,
+        "outcome": "fell",
+        "progress": 2305.0,
+        "reward": 16.260000000000055
+      }
+    ]
+  },
+  {
+    "steps": 200000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "time_expired",
+        "progress": 3240.0,
+        "reward": -147.60000000000633
+      },
+      {
+        "seed": 100001,
+        "outcome": "time_expired",
+        "progress": 440.0,
+        "reward": -183.59999999999974
+      },
+      {
+        "seed": 100002,
+        "outcome": "time_expired",
+        "progress": 1540.0,
+        "reward": -172.60000000000215
+      },
+      {
+        "seed": 100003,
+        "outcome": "fell",
+        "progress": 1260.0,
+        "reward": -89.45000000000258
+      },
+      {
+        "seed": 100004,
+        "outcome": "fell",
+        "progress": 2280.0,
+        "reward": -16.57999999999965
+      }
+    ]
+  },
+  {
+    "steps": 225000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "fell",
+        "progress": 1260.0,
+        "reward": -20.75999999999987
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 475.0,
+        "reward": -5.309999999999998
+      },
+      {
+        "seed": 100002,
+        "outcome": "time_expired",
+        "progress": 2560.0,
+        "reward": -156.40000000000506
+      },
+      {
+        "seed": 100003,
+        "outcome": "defeated",
+        "progress": 2155.0,
+        "reward": -7.639999999999756
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 2270.0,
+        "reward": -35.63999999999928
+      }
+    ]
+  },
+  {
+    "steps": 250000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 4610.0,
+        "reward": -67.4599999999983
+      },
+      {
+        "seed": 100001,
+        "outcome": "time_expired",
+        "progress": 475.0,
+        "reward": -183.24999999999983
+      },
+      {
+        "seed": 100002,
+        "outcome": "time_expired",
+        "progress": 860.0,
+        "reward": -179.40000000000055
+      },
+      {
+        "seed": 100003,
+        "outcome": "defeated",
+        "progress": 1890.0,
+        "reward": 4.820000000000022
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 2000.0,
+        "reward": 9.600000000000023
+      }
+    ]
+  },
+  {
+    "steps": 275000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "fell",
+        "progress": 1240.0,
+        "reward": 0.8000000000000131
+      },
+      {
+        "seed": 100001,
+        "outcome": "time_expired",
+        "progress": 515.0,
+        "reward": -182.8499999999999
+      },
+      {
+        "seed": 100002,
+        "outcome": "fell",
+        "progress": 780.0,
+        "reward": -2.559999999999995
+      },
+      {
+        "seed": 100003,
+        "outcome": "fell",
+        "progress": 800.0,
+        "reward": -48.19999999999936
+      },
+      {
+        "seed": 100004,
+        "outcome": "fell",
+        "progress": 2110.0,
+        "reward": -1.4999999999996412
+      }
+    ]
+  },
+  {
+    "steps": 300000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 2300.0,
+        "reward": 7.010000000000039
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 565.0,
+        "reward": -28.34999999999979
+      },
+      {
+        "seed": 100002,
+        "outcome": "fell",
+        "progress": 760.0,
+        "reward": -2.779999999999993
+      },
+      {
+        "seed": 100003,
+        "outcome": "time_expired",
+        "progress": 2560.0,
+        "reward": -152.40000000000543
+      },
+      {
+        "seed": 100004,
+        "outcome": "fell",
+        "progress": 1715.0,
+        "reward": -16.60000000000001
+      }
+    ]
+  },
+  {
+    "steps": 325000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 1000.0,
+        "reward": -45.05999999999948
+      },
+      {
+        "seed": 100001,
+        "outcome": "time_expired",
+        "progress": 420.0,
+        "reward": -181.8000000000001
+      },
+      {
+        "seed": 100002,
+        "outcome": "fell",
+        "progress": 755.0,
+        "reward": -8.36
+      },
+      {
+        "seed": 100003,
+        "outcome": "defeated",
+        "progress": 440.0,
+        "reward": -11.579999999999998
+      },
+      {
+        "seed": 100004,
+        "outcome": "time_expired",
+        "progress": 1520.0,
+        "reward": -168.80000000000246
+      }
+    ]
+  },
+  {
+    "steps": 350000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 1060.0,
+        "reward": -72.26999999999889
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 325.0,
+        "reward": -162.51000000000383
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 2160.0,
+        "reward": -17.449999999999932
+      },
+      {
+        "seed": 100003,
+        "outcome": "fell",
+        "progress": 2120.0,
+        "reward": 1.730000000000251
+      },
+      {
+        "seed": 100004,
+        "outcome": "time_expired",
+        "progress": 1560.0,
+        "reward": -166.40000000000293
+      }
+    ]
+  },
+  {
+    "steps": 375000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 3570.0,
+        "reward": 24.229999999999986
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 535.0,
+        "reward": -6.769999999999999
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 2960.0,
+        "reward": 11.30000000000002
+      },
+      {
+        "seed": 100003,
+        "outcome": "defeated",
+        "progress": 2965.0,
+        "reward": 14.060000000000052
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 3065.0,
+        "reward": 11.90000000000003
+      }
+    ]
+  },
+  {
+    "steps": 400000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "fell",
+        "progress": 1560.0,
+        "reward": 6.3400000000000105
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 320.0,
+        "reward": -5.589999999999998
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 3035.0,
+        "reward": 16.28000000000002
+      },
+      {
+        "seed": 100003,
+        "outcome": "defeated",
+        "progress": 2980.0,
+        "reward": 17.560000000000024
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 2990.0,
+        "reward": 17.68000000000002
+      }
+    ]
+  },
+  {
+    "steps": 425000,
+    "wins": 1,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 3605.0,
+        "reward": 22.699999999999964
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 480.0,
+        "reward": -5.929999999999999
+      },
+      {
+        "seed": 100002,
+        "outcome": "fell",
+        "progress": 700.0,
+        "reward": -2.519999999999995
+      },
+      {
+        "seed": 100003,
+        "outcome": "defeated",
+        "progress": 3010.0,
+        "reward": 15.980000000000022
+      },
+      {
+        "seed": 100004,
+        "outcome": "completed",
+        "progress": 4880.0,
+        "reward": 146.30999999999983
+      }
+    ]
+  },
+  {
+    "steps": 450000,
+    "wins": 1,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 4720.0,
+        "reward": 35.39999999999975
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 300.0,
+        "reward": -5.789999999999998
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 2970.0,
+        "reward": 15.440000000000024
+      },
+      {
+        "seed": 100003,
+        "outcome": "completed",
+        "progress": 4928.0,
+        "reward": 144.80999999999975
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 3010.0,
+        "reward": 15.890000000000018
+      }
+    ]
+  },
+  {
+    "steps": 475000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "defeated",
+        "progress": 3600.0,
+        "reward": 24.069999999999936
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 280.0,
+        "reward": -5.989999999999998
+      },
+      {
+        "seed": 100002,
+        "outcome": "fell",
+        "progress": 760.0,
+        "reward": -11.980000000000002
+      },
+      {
+        "seed": 100003,
+        "outcome": "fell",
+        "progress": 640.0,
+        "reward": -7.019999999999998
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 2990.0,
+        "reward": 19.68000000000002
+      }
+    ]
+  },
+  {
+    "steps": 500000,
+    "wins": 0,
+    "courses": [
+      {
+        "seed": 100000,
+        "outcome": "fell",
+        "progress": 1235.0,
+        "reward": -1.339999999999927
+      },
+      {
+        "seed": 100001,
+        "outcome": "fell",
+        "progress": 360.0,
+        "reward": -5.5299999999999985
+      },
+      {
+        "seed": 100002,
+        "outcome": "defeated",
+        "progress": 4695.0,
+        "reward": 33.0799999999998
+      },
+      {
+        "seed": 100003,
+        "outcome": "defeated",
+        "progress": 3060.0,
+        "reward": 15.230000000000047
+      },
+      {
+        "seed": 100004,
+        "outcome": "defeated",
+        "progress": 2950.0,
+        "reward": 19.170000000000023
+      }
+    ]
+  }
+]

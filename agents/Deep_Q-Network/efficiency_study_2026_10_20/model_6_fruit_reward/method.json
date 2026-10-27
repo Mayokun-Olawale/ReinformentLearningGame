@@ -1,0 +1,9 @@
+{
+  "id": "model_6_fruit_reward",
+  "name": "Larger fruit bonus",
+  "method": "Gap features + training fruit bonus 4 instead of 2",
+  "repeat": 4,
+  "rate": 0.0003,
+  "curriculum": false,
+  "fruit": 4
+}
