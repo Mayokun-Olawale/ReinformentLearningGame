@@ -1,0 +1,44 @@
+{
+  "randomize_obstacles": true,
+  "action_repeat": 2,
+  "seed": 7,
+  "steps": 1000000,
+  "learning_rate": 0.0001,
+  "curriculum": true,
+  "fruit_reward": 4.0,
+  "nominal_physics_tick_budget": 2000000,
+  "validation_frequency_decisions": 50000,
+  "checkpoint_selection": "validation completions, then mean progress",
+  "observation_size": 60,
+  "observation_version": "gap_geometry_v1",
+  "training_seeds": [
+    0,
+    99999
+  ],
+  "validation_seeds": [
+    100000,
+    100004
+  ],
+  "exploration_fraction": 0.8,
+  "exploration_final_eps": 0.1,
+  "final_model_decisions": 1000000,
+  "actual_physics_ticks": 1999828,
+  "training_elapsed_seconds": 628.0105809169982,
+  "curriculum_stages": [
+    {
+      "decisions": 0,
+      "physics_ticks": 0,
+      "difficulty": 0.2
+    },
+    {
+      "decisions": 204646,
+      "physics_ticks": 409233,
+      "difficulty": 0.6
+    },
+    {
+      "decisions": 501255,
+      "physics_ticks": 1002418,
+      "difficulty": 1.0
+    }
+  ]
+}

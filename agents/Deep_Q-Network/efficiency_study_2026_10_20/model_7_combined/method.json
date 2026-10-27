@@ -1,0 +1,9 @@
+{
+  "id": "model_7_combined",
+  "name": "Combined methods",
+  "method": "Gap features + two-tick decisions + curriculum + lower learning rate + fruit bonus 4",
+  "repeat": 2,
+  "rate": 0.0001,
+  "curriculum": true,
+  "fruit": 4
+}
