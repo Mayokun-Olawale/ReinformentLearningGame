@@ -1,0 +1,9 @@
+{
+  "id": "model_3_two_tick",
+  "name": "Two-tick decisions",
+  "method": "Gap features + decisions every two physics ticks",
+  "repeat": 2,
+  "rate": 0.0003,
+  "curriculum": false,
+  "fruit": 2
+}
