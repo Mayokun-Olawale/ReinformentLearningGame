@@ -20,3 +20,19 @@ agents/Deep_Q-Network/refractoring.md
 
 # Generated playback recordings
 agents/Deep_Q-Network/walkthrough/
+
+# Local training experiments; presentation evidence is kept under reports/.
+agents/Deep_Q-Network/gap_experiment/
+
+# Model 2 local archive (weights, logs, and recordings).
+agents/Deep_Q-Network/model_2_gap_features/
+
+# Full comparison study archives; report evidence is retained under reports/.
+agents/Deep_Q-Network/efficiency_study_*/
+
+# Local reports, presentation material, and PPO experiment artifacts.
+/reports/
+/agents/Proximal_Policy_Optimization/runs/
+/agents/Proximal_Policy_Optimization/efficiency_study_*/
+/agents/Proximal_Policy_Optimization/exploration_study_*/
+/agents/Proximal_Policy_Optimization/*.docx

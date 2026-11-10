@@ -158,3 +158,146 @@ python agents/Deep_Q-Network/summarize_efficiency_study.py --folder agents/Deep_
 
 Repeating these commands reuses the documented benchmark seeds. A new unseen
 benchmark is needed for an independent confirmation after tuning on these results.
+
+## Custom PyTorch PPO
+
+The implementation in `agents/Proximal_Policy_Optimization/` follows `agents/Proximal_Policy_Optimization/PPO_Platformer_Implementation_Spec.docx`:
+128×128 Tanh actor–critic, categorical actions, independent synchronous game
+instances, fresh on-policy rollouts, terminal-aware GAE, PPO clipping, optional
+old-value clipping, entropy bonus, gradient clipping, KL guard and learning-rate
+decay. It uses the existing 60-feature `gap_geometry_v1` observation encoder.
+Inputs already lie in [-1, 1]; no additional running normalization is fitted.
+
+Install the project dependencies, then run from the repository root:
+
+```bash
+python -m pip install -r requirements.txt
+python -m agents.Proximal_Policy_Optimization.train_ppo --config agents/Proximal_Policy_Optimization/config/ppo.json --run-dir agents/Proximal_Policy_Optimization/runs/ppo_seed7 --seed 7
+python -m agents.Proximal_Policy_Optimization.evaluate --algo ppo --checkpoint agents/Proximal_Policy_Optimization/runs/ppo_seed7/best.pt --output agents/Proximal_Policy_Optimization/runs/ppo_seed7/test.json
+python -m agents.Proximal_Policy_Optimization.plot_training agents/Proximal_Policy_Optimization/runs/ppo_seed7
+```
+
+Configuration uses JSON and needs no YAML dependency. `--timesteps` overrides the
+transition budget; `--device cpu`, `cuda`, or `mps` selects the PyTorch device when
+available. Defaults are four environments, 128 steps per environment, four update
+epochs and minibatches of 128. The exact transition budget must be divisible by
+the number of environments. The last rollout is shortened to meet that budget.
+A transition is one decision, executing up to `action_repeat` physics ticks.
+`metrics.csv` records both budgets, throughput, collection/update time, losses,
+entropy, approximate KL, clip fraction, gradient norm and learning rate.
+`episodes.json` records outcomes, fruit, progress and individual reward components.
+`validation.json` records fixed-seed completion and raw gameplay measures.
+
+PPO uses DQN's `CourseTrainingEnv` reward and decision cadence, including the
+existing five controls: left, right, jump, double jump, idle. Jump actions retain
+horizontal velocity and obey the engine's grounded/double-jump conditions.
+Training seeds advance within 0–99,999; validation uses 100,000 onward, with
+100,000–100,004 by default; default final tests use 200,000–200,009. Curriculum
+is optional and applies only during training. Validation always uses full courses
+and the standard fruit reward of 2. No physics or collision changes are needed.
+
+Each run writes `latest.pt`, periodic `checkpoint_<steps>.pt`, `best.pt` ranked by
+validation completion then progress, and `final.pt`. Checkpoints contain policy,
+optimizer, configuration, counters and PyTorch RNG state. Resume into a **fresh**
+run directory:
+
+```bash
+python -m agents.Proximal_Policy_Optimization.train_ppo --resume agents/Proximal_Policy_Optimization/runs/ppo_seed7/latest.pt --run-dir agents/Proximal_Policy_Optimization/runs/ppo_seed7_continued --timesteps 500000
+```
+
+Resume adds the requested decision budget, retaining policy/optimizer/counters;
+it restarts simulator episodes, course scheduling and the learning-rate schedule.
+It is not a bit-for-bit continuation of the interrupted trajectories. Configuration
+must otherwise match. Existing run metrics are protected from overwrite.
+
+For visible playback, add `--render` to the evaluation command. For a quick
+verification, create a config overriding `total_timesteps` to 4096,
+`max_episode_steps` to 512 and `validation_episodes` to 2. This checks execution,
+not learned completion skill. Run `python -m pytest -q` for correctness checks.
+
+For a controlled comparison, retrain each algorithm from scratch with at least
+three independent training seeds and equal transition budgets, action repeat,
+reward weights, curriculum, horizon and course distribution. The common evaluator
+supports `--algo dqn`, `random` and `right` as well as PPO; use `--seed-list` with
+a JSON array to select identical held-out courses. Use current 60-input DQN
+checkpoints. Pass matching `--max-episode-steps` and action repeat when needed.
+
+```bash
+python -m agents.Proximal_Policy_Optimization.evaluate --algo dqn --checkpoint path/to/dqn.zip --output runs/dqn_test.json
+python -m agents.Proximal_Policy_Optimization.compare agents/Proximal_Policy_Optimization/runs/ppo_seed7/test.json runs/dqn_test.json --output runs/comparison.json
+```
+
+The comparison tool rejects mismatched evaluation protocols and reports means and
+sample standard deviations across reports (use one report per training run).
+Training budgets are listed so unequal budgets remain visible. A single run has
+no estimated standard deviation. Repeat experiments at equal wall time separately;
+this implementation does not claim a PPO advantage without those experiments.
+Use configuration copies for reward, entropy, network-size, vectorization and
+curriculum ablations. Pixel policies, subprocess vectorization, checkpoint-start
+curricula, automated hyperparameter search and a completed multi-seed research
+study remain follow-up experiments.
+
+## PPO efficiency study
+
+Run the controlled study from the project root:
+
+```bash
+python -m agents.Proximal_Policy_Optimization.run_efficiency_study
+```
+
+Artifacts are written under
+`agents/Proximal_Policy_Optimization/efficiency_study_2026_11_09/`.
+The runner preserves the completed `runs/ppo_seed7` baseline, trains five isolated
+ablations and a validation-selected combination, repeats the baseline and the
+validation winner with three training seeds, evaluates on matched DQN courses
+and fresh confirmation courses, and benchmarks 1/4/8 synchronous environments.
+Training runs execute sequentially. This is a sustained experiment, not a short
+smoke test. Per-run `training_console.log` and study `status.json` show progress.
+
+Read `plan.json` for predeclared budgets and selection rules. The final `report.md`,
+`results.csv`, `seed_aggregates.json`, and plots contain the findings. Re-running
+the command skips completed runs; incomplete runs are preserved and reported
+rather than overwritten. Use `--folder` to start a separate study.
+
+Completed PPO study: see
+`agents/Proximal_Policy_Optimization/efficiency_study_2026_11_09/findings.md`
+and `report.md`. None of the five isolated changes beat the baseline on validation
+or on the 100 matched test courses. The unchanged combination stage reproduced
+the original policy exactly; defaults remain unchanged. Three-seed confirmation
+showed substantial variation. Full checkpoints, plots, seed lists and provenance
+are retained in the study directory.
+
+## PPO exploration tuning
+
+Run the entropy-only study with:
+
+```bash
+python -m agents.Proximal_Policy_Optimization.run_exploration_study
+```
+
+It compares the existing constant `entropy_coef=0.01` baseline with no entropy
+bonus, a constant `0.03` bonus, and `0.05` held for 20% of training then linearly
+decayed to `0.001`. Other learning settings and the 500,000-decision budget stay
+fixed. Existing baseline checkpoints are reselected at the matching 50,000-step
+cadence on 25 new validation seeds (110000–110024); final tests use 100 untouched
+seeds (1000000–1000099). A new validation winner receives two additional training
+seeds. Original training runs and earlier reports are preserved.
+
+Optional training configuration fields:
+
+- `entropy_schedule`: `constant` (default) or `linear`.
+- `entropy_final_coef`: nonnegative final bonus for a linear schedule.
+- `entropy_hold_fraction`: fraction of training before decay begins, default 0.
+- `validation_seed_start`: first validation course seed, default 100000.
+
+`metrics.csv` now includes the actual entropy coefficient and the fraction of
+sampled actions for each of the five engine controls. Checkpoints retain the
+initial schedule configuration. The study's `report.md`, `results.csv`,
+`seed_aggregates.json` and `exploration_curves.png` are stored under
+`agents/Proximal_Policy_Optimization/exploration_study_2026_11_09/`.
+
+The completed exploration study found no improvement: on the 100 new final
+courses, seed-7 completion was 14% for the existing 0.01 bonus, 2% without a
+bonus, 0% with constant 0.03, and 2% with hold-then-decay. The default remains
+0.01. New candidates were screened with one training seed; the baseline's
+three-seed results remain highly variable. See the study report for limits.

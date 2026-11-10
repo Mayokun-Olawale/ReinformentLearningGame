@@ -19,6 +19,8 @@ class CourseTrainingEnv(gym.Wrapper):
 
     def step(self, action): #demo
         total = 0.0
+        components = dict(progress=0.0, step_cost=0.0, fruit=0.0, damage=0.0,
+                          goal=0.0, death=0.0, timeout=0.0)
         # One model decision runs for up to four physics ticks.
         # Stop early if the episode ends, and sum rewards over executed ticks.
         ticks = 0
@@ -27,6 +29,10 @@ class CourseTrainingEnv(gym.Wrapper):
             obs, _, terminated, truncated, info = self.env.step(action)
             ticks += 1
             events = info["events"]
+            components['progress'] += info['progress_reward'] * 5
+            components['step_cost'] -= 0.01
+            components['fruit'] += self.fruit_reward * int(events['picked_fruit'])
+            components['damage'] -= 2 * int(events['took_hit'])
             # Base progress is 0.002/new pixel: x5 gives 0.01/new pixel.
             # Charge 0.01 per tick to discourage waiting. Fruit +2; damage -2.
             total += info["progress_reward"] * 5 - 0.01
@@ -34,12 +40,15 @@ class CourseTrainingEnv(gym.Wrapper):
             # Finish +100; falling, losing all lives, or timing out costs 10.
             if events["reached_goal"]:
                 total += 100
+                components['goal'] += 100
             elif events["fell_off_map"] or self.env.game.player.life_count <= 0:
                 total -= 10
+                components['death'] -= 10
             elif truncated:
                 total -= 10
+                components['timeout'] -= 10
             if terminated or truncated:
                 break
         # Return the final observation/info and the accumulated decision reward.
-        info = dict(info, decision_ticks=ticks)
+        info = dict(info, decision_ticks=ticks, reward_components=components)
         return obs, total, terminated, truncated, info
